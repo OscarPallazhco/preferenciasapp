@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preferenciasapp/src/widgets/menuW.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -7,7 +8,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Preferencias de Usuario'),
       ),
-      drawer: _crearMenu(),
+      drawer: MenuWidget(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -19,14 +20,10 @@ class HomePage extends StatelessWidget {
           Divider(),
         ],
       ),
-
     );
   }
 
-  Widget _crearMenu() {
-    return Drawer(
-      
-        
-      );
-  }
+  // Widget _crearMenu(BuildContext context) {
+  //   return ;
+  // }
 }
