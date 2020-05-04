@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
   
   final _color = userPreferences.colorSecundario ? Theme.of(context).secondaryHeaderColor:Theme.of(context).primaryColor;
+  userPreferences.ultimaPagina = 'home';
 
     return Scaffold(
       appBar: AppBar(

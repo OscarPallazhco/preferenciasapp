@@ -21,6 +21,7 @@ class _SettingsPageState extends State<SettingsPage> {
     _secundario = userPreferences.colorSecundario;
     _genero = userPreferences.genero;
     _textController = TextEditingController(text: userPreferences.nombreUsuario);
+    userPreferences.ultimaPagina = 'settings';
   }
 
   @override
@@ -32,7 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings',),
-        backgroundColor: userPreferences.colorSecundario ? Theme.of(context).secondaryHeaderColor:Theme.of(context).primaryColor,
+        backgroundColor: _color,
       ),
       drawer: MenuWidget(),
       body: ListView(
