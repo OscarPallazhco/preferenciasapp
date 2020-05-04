@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preferenciasapp/src/shared_preferences/user_preferences.dart';
 import 'package:preferenciasapp/src/widgets/menuW.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -9,25 +10,29 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
-  bool _secundario = false;
-  int _genero = 1;
-  String _nombre = 'Eduardo';
+  bool _secundario;
+  int _genero;
   TextEditingController _textController;
+  final userPreferences = UserPreferences();
 
   @override
-  void initState() { 
-    super.initState();
-    _textController = TextEditingController(text: _nombre);
+  void initState() {
+    super.initState();    
+    _secundario = userPreferences.colorSecundario;
+    _genero = userPreferences.genero;
+    _textController = TextEditingController(text: userPreferences.nombreUsuario);
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final _color = userPreferences.colorSecundario ? Theme.of(context).secondaryHeaderColor:Theme.of(context).primaryColor;
+
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Settings',
-        ),
+        title: Text('Settings',),
+        backgroundColor: userPreferences.colorSecundario ? Theme.of(context).secondaryHeaderColor:Theme.of(context).primaryColor,
       ),
       drawer: MenuWidget(),
       body: ListView(
@@ -42,10 +47,42 @@ class _SettingsPageState extends State<SettingsPage> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          Divider(color: Colors.grey,),
-          SwitchListTile(value: _secundario, onChanged: (bool newValue) {_secundario = newValue; setState(() {}); }, title: Text('Color secundario'),),
-          RadioListTile(value: 2, groupValue: _genero, onChanged: (int newValue){_genero = newValue; setState(() {}); }, title: Text('Femenino'),),
-          RadioListTile(value: 1, groupValue: _genero, onChanged: (int newValue){_genero = newValue; setState(() {}); }, title: Text('Masculino'),),
+          Divider(
+            color: Colors.grey,
+          ),
+          SwitchListTile(
+            value: _secundario,
+            onChanged: (bool newValue) {
+              userPreferences.colorSecundario = newValue;
+              _secundario = newValue;
+              setState(() {});
+            },
+            title: Text('Color secundario'),
+            activeTrackColor: _color,
+            activeColor: _color,
+          ),
+          RadioListTile(
+            value: 2,
+            groupValue: _genero,
+            onChanged: (int newValue) {
+              userPreferences.genero = newValue;
+              _genero = newValue;
+              setState(() {});
+            },
+            title: Text('Femenino'),
+            activeColor: _color,
+          ),
+          RadioListTile(
+            value: 1,
+            groupValue: _genero,
+            onChanged: (int newValue) {
+              userPreferences.genero = newValue;
+              _genero = newValue;
+              setState(() {});
+            },
+            title: Text('Masculino'),
+            activeColor: _color,
+          ),
           Divider(),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -55,10 +92,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 labelText: 'Nombre',
                 helperText: 'Nombre de la persona usando el dispositivo',
               ),
-              onChanged: ( String newValue){},
+              onChanged: (String newValue) {
+                userPreferences.nombreUsuario = newValue;
+                setState(() {});
+              },
             ),
           )
-
         ],
       ),
     );
