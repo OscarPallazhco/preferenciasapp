@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:preferenciasapp/src/pages/home_page.dart';
+import 'package:preferenciasapp/src/pages/images_page.dart';
 import 'package:preferenciasapp/src/pages/settings_page.dart';
+import 'package:preferenciasapp/src/pages/songs_page.dart';
 import 'package:preferenciasapp/src/shared_preferences/user_preferences.dart';
 
 void main() async {
@@ -14,13 +16,16 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final userPreferences = UserPreferences();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Preferencias de usuario App',
-      initialRoute: 'home',
+      initialRoute: userPreferences.ultimaPagina,
       routes: {
         'home': (BuildContext context) => HomePage(),
         'settings': (BuildContext context) => SettingsPage(),
+        'images': (BuildContext context) => ImagesPage(),
+        'songs': (BuildContext context) => SongsPage(),
       },
       theme: ThemeData(
         primaryColor: Colors.blue,
