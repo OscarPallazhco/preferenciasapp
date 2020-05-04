@@ -39,7 +39,7 @@ class MenuWidget extends StatelessWidget {
             leading: Icon(Icons.image, color: _color, ),
             onTap: (){
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'home');
+              Navigator.pushReplacementNamed(context, 'images');
             },
             title: Text('Images'),
           ),
@@ -47,7 +47,7 @@ class MenuWidget extends StatelessWidget {
             leading: Icon(Icons.library_music, color: _color, ),
             onTap: (){
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'home');
+              Navigator.pushReplacementNamed(context, 'songs');
             },
             title: Text('Songs'),
           ),
